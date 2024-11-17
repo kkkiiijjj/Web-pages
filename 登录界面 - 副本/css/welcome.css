@@ -1,0 +1,12 @@
+body{
+    background-color: #222;
+}
+.container{
+    width:550px;
+    height:auto;
+    margin: 350px auto 0 auto;
+    text-align: center;
+}
+.welcome{
+    color:#0ADBB9;
+}

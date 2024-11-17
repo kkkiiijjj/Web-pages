@@ -1,0 +1,74 @@
+<html>
+    <head>
+        <title>emoji calculator</title>
+        <link rel="stylesheet" href="index.css">
+    </head>
+    <body>
+        <div id="container">
+            <div id="calculator">
+
+                <table>
+                    <tr>
+                      <td colspan="4"><input type='text' id="result" class='input'></td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <input type='button' value='😀' onclick="display('😀')" class="emoji"/>
+                      </td>
+                      <td>
+                        <input type='button' value='🦐' onclick="display('🦐')" class="emoji"/>
+                      </td>
+                      <td>
+                        <input type='button' value='🐱' onclick="display('🐱')" class="emoji"/>
+                      </td>
+                      <td>
+                        <input type='button' value='C' onclick="clearscreen()" class="operator"/>
+                      </td>
+                      </tr>
+                      <tr>
+                      <td>
+                        <input type='button' value='🍫' onclick="display('🍫')" class="emoji"/>
+                      </td>
+                      <td>
+                        <input type='button' value='🍷' onclick="display('🍷')" class="emoji"/>
+                      </td>
+                      <td>
+                        <input type='button' value='🍄' onclick="display('🍄')" class="emoji"/>
+                      </td>
+                      <td>
+                        <input type='button' value='-' onclick="display('-')" class="operator"/>
+                      </td>
+                      </tr>
+                      <tr>
+                      <td>
+                        <input type='button' value='💻' onclick="display('💻')" class="emoji"/>
+                      </td>
+                      <td>
+                        <input type='button' value='🎸' onclick="display('🎸')" class="emoji"/>
+                      </td>
+                      <td>
+                        <input type='button' value='🧻' onclick="display('🧻')" class="emoji"/>
+                      </td>
+                      <td>
+                        <input type='button' value='+' onclick="display('+')" class="operator"/>
+                      </td>
+                    </tr>
+                    <tr>
+                        <td>
+                          <input type='button' value='👽' onclick="display('👽')" class="operator"/>
+                        </td>
+                      <td>
+                        <input type='button' value='🔍' onclick="display('🔍')" class="emoji"/>
+                      </td>
+                      <td>
+                        <input type='button' value='🚽' onclick="display('🚽')" class="emoji"/>
+                      </td>
+                      <td>
+                        <input type='button' value='=' onclick="calculate()" class="operator"/>
+                      </td>
+                    </tr>
+                </table>
+        </div>
+        <script src="index.js"></script>
+    </body>
+</html>

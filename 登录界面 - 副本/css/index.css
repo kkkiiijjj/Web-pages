@@ -1,0 +1,50 @@
+body {
+    background-color: #222;
+}
+.container {
+	width:350px;
+	height:auto;
+    margin: 80px auto 0 auto;
+    text-align: center;
+}
+.cue{
+    color:#0ADBB9;
+}
+form {
+    position: relative;
+    width: 350px;
+    margin: 15px auto 0 auto;
+    text-align: center;
+}
+input {
+    width: 320px;
+    margin: 15px 0 0 0;
+    padding: 8px;
+    border: 1.5px solid #0ADBB9;
+    border-radius: 20px;
+    background-color: #fff;
+}
+input::placeholder {
+    color: #0ADBB9;
+  }
+  
+button{
+    width: 60px;
+    font-size: 30px;
+    margin: 15px 0 0 0;
+    padding: 2px;
+    border: 1.5px solid #FF1379;
+    border-radius: 40px;
+    background-color: #FF1379;
+}
+button:hover {
+    box-shadow:
+        0 15px 30px 0 rgba(255,255,255,.85) inset,
+        0 2px 7px 0 rgba(0,0,0,.2);
+}
+button:active {
+    top: 1px;
+    box-shadow:
+        0 15px 30px 0 rgba(255,255,255,.15) inset,
+        0 2px 7px 0 rgba(0,0,0,.2);
+}

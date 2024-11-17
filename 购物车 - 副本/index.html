@@ -1,0 +1,198 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>京东购物车</title>
+        <link rel="stylesheet" type="text/css" href="css/site.css">
+    </head>
+    <body>
+        <!-- 购物车的商品行数据在页面中写死，实际网站应从后台数据库读取 -->
+        <table>
+            <!-- 表格 -->
+            <thead><!--表头-->
+                <tr><!--行-->
+                    <th>
+                        <input type="checkbox" class="checkall"/><!--选择框-->
+                    </th>
+                    <th>商品</th>
+                    <th>单价</th>
+                    <th>数量</th>
+                    <th>小计</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody><!--表格内容-->
+                <tr>
+                    <td>
+                        <input type="checkbox"/>
+                    </td>
+                    <td class="title">
+                        <img src="pic/javascript权威指南.png" class="goodsPic"/><!--书籍封面-->
+                        javascript权威指南<!--书名-->
+                    </td>
+                    <td>￥<label class="price">500.00</label></td><!--价格-->
+                    <td><!--数量-->
+                        <a href="#" class="minus">-</a><!--
+                        --><input type="text" value="1" class="numberInput"/><!--
+                        --><a href="#" class="plus">+</a>
+                    </td><!--小计-->
+                    <td>￥<label class="subTotal"></label></td>
+                    <td><a href="#" class="deleteLink">删除</a></td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox"/>
+                    </td>
+                    <td class="title">
+                        <img src="pic/java编程思想.png"  class="goodsPic"/>
+                        java编程思想
+                    </td>
+                    <td>￥<label class="price">50.10</label></td>
+                    <td>
+                        <a href="#" class="minus">-</a><!--
+                        --><input type="text" value="3" class="numberInput"/><!--
+                        --><a href="#" class="plus">+</a>
+                    </td>
+                    <td>￥<label class="subTotal"></label></td>
+                    <td><a href="#" class="deleteLink">删除</a></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>已选择<label class="numberTotal"></label>件商品</td>
+                    <td>总计：￥<label class="total"></label></td>
+                    <td></td>
+                </tr>
+            </tfoot>
+        </table>
+    </body>
+
+    <script src="js/jquery-1.11.1.min.js"></script><!--to include the jQuery JavaScript library-->
+    <script src="js/site.js"></script>
+
+    <script>
+
+        $(document).ready(function() {
+
+            //对每个商品行计算小计、设置“-”的状态
+            $("table tbody tr").each(function() {//选中表格所有行并为每一行传入一个函数
+                calculateSubTotal($(this));
+                setMinusLinkState($(this));
+            });
+            //计算所有商品的总计
+            calculateTotal();
+
+
+            //“+”鼠标单击事件
+            $(".plus").click(function() {
+                //找到“数量”文本框
+                var numberInput = $(this).prev();
+                //文本框的数值加1
+                var numberStr = numberInput.val();
+                var number = parseInt(numberStr);
+                numberInput.val(number + 1);
+                
+                //找到当前商品所在的数据行
+                //closest()：离当前元素最近的祖先元素
+                var row = $(this).closest("tr");
+
+                //计算小计
+                calculateSubTotal(row);
+                //计算总计
+                calculateTotal();
+                //设置“-”的状态
+                setMinusLinkState(row);
+            });
+
+
+            //“-”鼠标单击事件
+            $(".minus").click(function() {
+                //找到“数量”文本框
+                var numberInput = $(this).next();
+                //文本框的数值减1
+                var numberStr = numberInput.val();
+                var number = parseInt(numberStr);
+
+                //当“数量”文本框的数量>=2时，点击“-”进行减1
+                if(number >= 2) {
+                    numberInput.val(number - 1);
+
+                    var row = $(this).closest("tr");
+                    calculateSubTotal(row);
+                    calculateTotal();
+                }
+
+                setMinusLinkState(row);
+            });
+
+
+            //检测“数量”文本框输入的有效性，必须是正整数
+            //blur：失去焦点事件
+            $(".numberInput").blur(function() {
+                //获取文本框的值
+                var numberStr = $(this).val();
+                
+                //正则表达式：正整数
+                var pattern = /^[1-9]\d*$/;
+
+                if(pattern.test(numberStr)) {
+                    var row = $(this).closest("tr");
+                    
+                    calculateSubTotal(row);
+                    calculateTotal();
+                    setMinusLinkState(row);
+                }
+                else {
+                    alert("输入错误，请输入正整数！");
+                }
+            });
+
+
+            //删除一行商品
+            $(".deleteLink").click(function() {
+                //删除确认对话框
+                var ok = confirm("确定要删除该宝贝吗？")
+                
+                if(ok) {
+                    //"删除"链接所在的商品行
+                    var row = $(this).closest("tr");
+                    //删除当前这行商品
+                    row.remove();
+                    //更新总计
+                    calculateTotal();
+                }
+            });
+            $(":checkbox.checkall").click(function () {
+                $(":checkbox").prop("checked", this.checked);
+                if ($(this).prop("checked")) {
+                    $(":checkbox:not(.checkall)").parent().parent().addClass("checked");
+                } else {
+                    $(":checkbox:not(.checkall)").parent().parent().removeClass("checked");
+                }
+                calculateTotal();
+            });
+
+            $(":checkbox:not(.checkall)").click(function () {
+                var tbody = $(this).parent().parent().parent();
+                var count1 = tbody.find(":checked").length; //当前选中的数量
+                var count2 = tbody.find(":checkbox").length;//当前这个td里面有多少个复选框
+                if (count1 == count2) {
+                    $(".checkall").prop("checked", true);
+                }
+                else {
+                    $(".checkall").prop("checked", false);
+                }
+                if ($(this).prop("checked")) {
+                    $(this).parent().parent().addClass("checked");
+                } else {
+                    $(this).parent().parent().removeClass("checked");
+                }
+                calculateTotal();
+            });
+        });
+    
+    </script>    
+</html>

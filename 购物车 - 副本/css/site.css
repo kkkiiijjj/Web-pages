@@ -1,0 +1,90 @@
+﻿table {
+    border-collapse: collapse;
+    font-size: 0.9em;
+
+    width: 80%;
+    /* 购物车在整个页面水平居中 */
+    margin-left: auto;
+    margin-right: auto;
+}
+thead, tfoot {
+    background-color: #f3f3f3;
+}
+
+th, td {
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+    /* border: 1px solid gray; */
+}
+th {
+    font-weight:normal;
+    padding: 10px;
+}
+td {
+    padding: 30px 10px;
+
+    text-align: center;
+}
+
+
+.title {
+    text-align: left;
+}
+.goodsPic {
+    width: 80px;
+    /*图片、文字并排，两者垂直居中*/
+    /* https://segmentfault.com/q/1010000010967267 */
+    vertical-align:middle;
+}
+.minus, .plus {
+    text-decoration: none;
+    border: 1px solid gray;
+
+    /* inline-block：设置高度宽度有效，且不换行 */
+    display:inline-block;
+    width: 20px;
+    height: 40px;
+
+    /* 文字水平居中 */
+    text-align: center;
+
+    /* height(高度)=line-height(行高)：文字垂直居中 */
+    line-height: 40px;
+
+    /* 与兄弟元素垂直居中 */
+    vertical-align:middle;
+}
+
+.numberInput {
+    width: 50px;
+    height: 40px;
+    line-height: 40px;
+
+    padding: 0;
+    border: 1px solid gray;
+    border-left:none;
+    border-right:none;
+
+    vertical-align:middle;
+    text-align: center;
+}
+
+.deleteLink {
+    text-decoration: none;
+    color:black;
+}
+.deleteLink:hover {
+    color:red;
+}
+
+
+/* 
+    禁用链接a（点击链接无反应）
+    IE8不支持
+*/
+.disableLink {
+    pointer-events:none;
+}
+.checked{
+    background-color: #ff8800;
+}
